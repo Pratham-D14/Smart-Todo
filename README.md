@@ -1,4 +1,4 @@
-<a href="https://smart-todo-six.vercel.app/">Smart ToDo – AI-Powered Task Management App</a>
+<h1><a href="https://smart-todo-six.vercel.app/">Smart ToDo – AI-Powered Task Management App</a></h1><br>
 Smart ToDo is a full-stack task management application that helps users organize, prioritize, and complete tasks efficiently — powered by AI to recommend what to do next.
 🔧 Tech Stack
 Frontend: Next.js, React, Tailwind CSS, TypeScript
