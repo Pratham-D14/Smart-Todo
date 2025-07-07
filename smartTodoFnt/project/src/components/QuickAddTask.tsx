@@ -35,6 +35,8 @@ const QuickAddTask: React.FC<QuickAddTaskProps> = ({ onClose, onSubmit }) => {
       status: "pending",
       aiScore: Math.floor(Math.random() * 10) + 1,
       tags: formData.tags.filter((tag) => tag.trim() !== ""),
+      checklist_items: formData.checklist_items,
+      category_id: 1, // TODO: Replace with actual category ID logic
     });
     onClose();
   };
@@ -69,7 +71,7 @@ const QuickAddTask: React.FC<QuickAddTaskProps> = ({ onClose, onSubmit }) => {
       };
       setFormData((prev) => ({
         ...prev,
-        checklistItems: [...prev.checklistItems, newItem],
+        checklist_items: [...prev.checklist_items, newItem],
       }));
       setNewChecklistItem("");
     }
@@ -78,14 +80,16 @@ const QuickAddTask: React.FC<QuickAddTaskProps> = ({ onClose, onSubmit }) => {
   const removeChecklistItem = (itemId: string) => {
     setFormData((prev) => ({
       ...prev,
-      checklistItems: prev.checklistItems.filter((item) => item.id !== itemId),
+      checklist_items: prev.checklist_items.filter(
+        (item) => item.id !== itemId
+      ),
     }));
   };
 
   const toggleChecklistItem = (itemId: string) => {
     setFormData((prev) => ({
       ...prev,
-      checklistItems: prev.checklistItems.map((item) =>
+      checklist_items: prev.checklist_items.map((item) =>
         item.id === itemId ? { ...item, completed: !item.completed } : item
       ),
     }));
@@ -94,7 +98,7 @@ const QuickAddTask: React.FC<QuickAddTaskProps> = ({ onClose, onSubmit }) => {
   const updateChecklistItemText = (itemId: string, newText: string) => {
     setFormData((prev) => ({
       ...prev,
-      checklistItems: prev.checklistItems.map((item) =>
+      checklist_items: prev.checklist_items.map((item) =>
         item.id === itemId ? { ...item, text: newText } : item
       ),
     }));
@@ -186,7 +190,7 @@ const QuickAddTask: React.FC<QuickAddTaskProps> = ({ onClose, onSubmit }) => {
               Checklist Items (Optional)
             </label>
             <div className="space-y-2 mb-3">
-              {formData.checklistItems.map((item) => (
+              {formData.checklist_items.map((item) => (
                 <div
                   key={item.id}
                   className="flex items-center space-x-2 p-2 bg-gray-50 rounded-md"

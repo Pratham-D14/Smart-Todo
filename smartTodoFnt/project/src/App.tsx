@@ -42,7 +42,9 @@ function App() {
     const fetchTasks = async () => {
       try {
         setLoading(true);
-        const res = await fetch("http://localhost:8000/api/tasks");
+        const res = await fetch(
+          "https://smart-todo-739m.onrender.com/api/tasks"
+        );
         if (!res.ok) throw new Error("Failed to fetch tasks");
 
         const rawData = await res.json();
@@ -77,15 +79,18 @@ function App() {
     taskData: Omit<Task, "id" | "createdAt" | "updatedAt">
   ) => {
     try {
-      const res = await fetch("http://localhost:8000/api/tasks/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...taskData,
-          category_id: taskData.category_id || 1,
-          priority_score: mapPriorityToScore(taskData.priority), // ✅ convert priority to score
-        }),
-      });
+      const res = await fetch(
+        "https://smart-todo-739m.onrender.com/api/tasks/create",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...taskData,
+            category_id: taskData.category_id || 1,
+            priority_score: mapPriorityToScore(taskData.priority), // ✅ convert priority to score
+          }),
+        }
+      );
 
       if (!res.ok) {
         const errorText = await res.text();
@@ -131,7 +136,7 @@ function App() {
       delete (transformedTask as any).priority; // ✅ remove old priority string
 
       const res = await fetch(
-        `http://localhost:8000/api/tasks/${updatedTask.id}/update`,
+        `https://smart-todo-739m.onrender.com/api/tasks/${updatedTask.id}/update`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -175,7 +180,7 @@ function App() {
   const handleTaskDelete = async (taskId: string) => {
     try {
       const res = await fetch(
-        `http://localhost:8000/api/tasks/${taskId}/delete`,
+        `https://smart-todo-739m.onrender.com/api/tasks/${taskId}/delete`,
         {
           method: "DELETE",
         }
@@ -195,7 +200,9 @@ function App() {
 
   const fetchRecommendedTask = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/tasks/recommend");
+      const res = await fetch(
+        "https://smart-todo-739m.onrender.com/api/tasks/recommend"
+      );
       if (!res.ok) throw new Error("Failed to fetch recommended task");
 
       const t = await res.json();

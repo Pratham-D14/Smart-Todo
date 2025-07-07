@@ -151,7 +151,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           onClick={fetchRecommendedTask}
           className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
         >
-          💡 What Should I Do Now?
+          💡 AI Recommendation
         </button>
 
         {recommendedTask && (
