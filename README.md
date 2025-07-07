@@ -16,11 +16,11 @@ AI Integration: OpenAI API<br>
 
 <b>Hosting:</b><br>
 Frontend → Vercel<br>
-## How to Start Locally: /smarttodo -> python manage.py runserver<br>
+## How to Start Locally: /smartTodoFnt/project -> npm run dev<br>
 <br>
 
 Backend → Render<br>
-## How to Start Locally: /smartTodoFnt/project -> npm run dev<br>
+## How to Start Locally: /smarttodo -> python manage.py runserver<br>
 
 <br>
 <br>
