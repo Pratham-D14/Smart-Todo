@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "corsheaders",
     "tasks",
     "corsheaders",
 ]
@@ -60,6 +61,7 @@ STATIC_URL = "/static/"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://smart-todo-six.vercel.app",
 ]
 
 CORS_ALLOW_METHODS = [
