@@ -2,17 +2,29 @@
 Smart ToDo is a full-stack task management application that helps users organize, prioritize, and complete tasks efficiently — powered by AI to recommend what to do next.
 
 <br>
+<br>
+<br>
+
+
 <b>🔧 Tech Stack</b><br>
 Frontend: Next.js, React, Tailwind CSS, TypeScript<br>
 Backend: Django REST Framework<br>
 AI Integration: OpenAI API<br>
 
+<br>
+<br>
+
 <b>Hosting:</b><br>
 Frontend → Vercel<br>
 ## How to Start Locally: /smarttodo -> python manage.py runserver<br>
+<br>
+
 Backend → Render<br>
 ## How to Start Locally: /smartTodoFnt/project -> npm run dev<br>
 
+<br>
+<br>
+<br>
 
 
 <b>Features</b><br>
