@@ -16,6 +16,8 @@ interface DashboardProps {
   onTaskCreate: (task: Omit<Task, "id" | "createdAt" | "updatedAt">) => void;
   searchQuery: string;
   onTaskDelete: (taskId: string) => void;
+  recommendedTask: Task | null;
+  fetchRecommendedTask: () => void;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({
@@ -24,6 +26,8 @@ const Dashboard: React.FC<DashboardProps> = ({
   onTaskCreate,
   searchQuery,
   onTaskDelete,
+  recommendedTask,
+  fetchRecommendedTask,
 }) => {
   const [showQuickAdd, setShowQuickAdd] = useState(false);
   const [filter, setFilter] = useState("all");
@@ -139,6 +143,30 @@ const Dashboard: React.FC<DashboardProps> = ({
           <Plus className="h-5 w-5" />
           <span>Add Task</span>
         </button>
+      </div>
+
+      {/* AI Recommendation Button */}
+      <div className="mb-6">
+        <button
+          onClick={fetchRecommendedTask}
+          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+        >
+          💡 What Should I Do Now?
+        </button>
+
+        {recommendedTask && (
+          <div className="mt-4 bg-green-50 border border-green-300 rounded-lg p-4 shadow-sm">
+            <h3 className="text-lg font-semibold text-green-700 mb-1">
+              AI Suggests:
+            </h3>
+            <p className="text-gray-800">
+              <strong>{recommendedTask.title}</strong> —{" "}
+              <span className="text-sm text-gray-600">
+                {recommendedTask.description}
+              </span>
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Tasks Grid */}

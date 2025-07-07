@@ -10,6 +10,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [recommendedTask, setRecommendedTask] = useState<Task | null>(null);
 
   const mapPriorityToScore = (priority: string): number => {
     switch (priority) {
@@ -192,6 +193,35 @@ function App() {
     }
   };
 
+  const fetchRecommendedTask = async () => {
+    try {
+      const res = await fetch("http://localhost:8000/api/tasks/recommend");
+      if (!res.ok) throw new Error("Failed to fetch recommended task");
+
+      const t = await res.json();
+      const task: Task = {
+        id: t.id.toString(),
+        title: t.title,
+        description: t.description,
+        checklist_items: t.checklist_items,
+        category: t.category?.name || "Uncategorized",
+        category_id: t.category?.id || 1,
+        priority: mapPriorityScore(t.priority_score),
+        aiScore: t.priority_score,
+        deadline: t.deadline,
+        status: normalizeStatus(t.status),
+        tags: t.tags || [],
+        createdAt: t.created_at || new Date().toISOString(),
+        updatedAt: t.updated_at || new Date().toISOString(),
+      };
+
+      setRecommendedTask(task);
+    } catch (err) {
+      console.error("AI Suggestion Error:", err);
+      setRecommendedTask(null);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
@@ -207,6 +237,8 @@ function App() {
             onTaskUpdate={handleTaskUpdate}
             onTaskCreate={handleTaskCreate}
             onTaskDelete={handleTaskDelete}
+            recommendedTask={recommendedTask}
+            fetchRecommendedTask={fetchRecommendedTask}
           />
         )}
       </main>
